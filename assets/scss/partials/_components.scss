@@ -1,0 +1,34 @@
+//-------------------------------- 
+// Components - buttons, etc
+//--------------------------------
+
+$buttonFontSize: 15px;
+$buttonRadius: 3px;
+$buttonBorderWidth: 2px;
+$buttonPadding: 18px 26px;
+
+.button {
+  @include appearance(none);
+  background: transparent;
+  font-family: $font-regular;
+  font-size: $buttonFontSize;
+  text-transform: uppercase;
+  border-radius: $buttonRadius;
+  padding: $buttonPadding;
+  cursor: pointer;
+  @include transition(all .3s ease);
+  &:hover {
+    @include opacity(.5);
+  }
+  &.white {
+    color: white;
+    border: $buttonBorderWidth solid white;
+    i { color: white; padding-left: 11px; }
+  }
+
+  &.green {
+    color: $color-green;
+    border: $buttonBorderWidth solid $color-green;
+    i { color: $color-green; padding-left: 11px; }
+  }
+}
