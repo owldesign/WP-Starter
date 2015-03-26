@@ -1,114 +1,15 @@
-// Bourbon
-@import "bourbon/bourbon"; // http://bourbon.io/
-// Neat
+// Bourbon Mixins
+@import "lib/bourbon/bourbon"; // http://bourbon.io/
+
+// Neat Grids
 @import "partials/grid-settings";
-@import "neat/neat"; // http://neat.bourbon.io/
+@import "lib/neat/neat"; // http://neat.bourbon.io/
 
-
+// Partials
+@import "partials/reset"; // reset css
 @import "partials/mixins"; // custom mixins
 @import "partials/variables"; // colors, fonts etc...
-@import "partials/typography"; // typography
-@import "partials/components"; // components, buttons, etc..
-@import "partials/layout"; // responsive grid and media queries
 
 //-------------------------------- 
 // Primary style
 //--------------------------------
-body {
-  font-size: 16px;
-}
-.container {
-	@include outer-container;
-}
-
-//-------------------------------- 
-// HERO SECTION
-//--------------------------------
-#hero {
-  background: url(../images/hero-bg.jpg) repeat-x;
-  max-height: 650px;
-  overflow: hidden;
-  // Logo
-  .logo {
-    position: relative;
-    span {
-      display: block;
-      @include position(absolute, 0 null null 0);
-      @include size(100px 100px);
-      &.layer-logo {
-        top: 28px;
-        left: 36px;
-        background: url(../images/logo.png) no-repeat;
-        background-size: 27%;
-        z-index: 4;
-      }
-      &.layer1 { background: white; z-index: 3; }
-      &.layer2 { background: #0da9e5; z-index: 2; top: 4px; }
-      &.layer3 { background: #0da9e5; z-index: 1; top: 15px; left: 15px; }
-    }
-  }
-  
-  // Menu
-  .menu {
-    position: relative;
-    top: 39px;
-    right: 19px;
-    float: right;
-    span {
-      display: block;
-      @include size(30px 4px);
-      border-radius: 3px;
-      margin-bottom: 2px;
-      background: white;
-    }
-  }
-
-  // Content 
-  .content {
-    text-align: right;
-    padding-top: 160px;
-    padding-right: 20px;
-    .welcome-image {
-      width: 303px;
-      height: auto;
-      margin-bottom: 46px;
-    }
-    .h2 {
-      color: white;
-      margin-bottom: 49px;
-    }
-  }
-
-  .iphone-single {
-    position: relative;
-    bottom: 39px;
-    left: 71px;
-  }
-}
-
-
-//-------------------------------- 
-// ABOUT ME SECTION
-//--------------------------------
-#about {
-  max-height: 650px;
-  overflow: hidden;
-  .content {
-    padding-top: 143px;
-    @include span-columns(7);
-  }
-  .ipad-single {
-    position: relative;
-    top: -358px;
-    left: 761px;
-  }
-}
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-	<main id="primary" class="row-fluid">
-		<div id="content" role="main" class="span8 offset2">
+	<main id="primary">
+		<div id="content">
 
 			<?php if ( have_posts() ) : ?>
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -41,8 +41,8 @@
 				<div id="pagination" class="clearfix">
 					<div class="past-page"><?php previous_posts_link( 'newer' ); ?></div>
 					<div class="next-page"><?php next_posts_link( 'older' ); ?></div>
-				</div><!-- pagination -->
-
+				</div>
+				<!-- pagination -->
 
 			<?php else : ?>
 				
@@ -51,6 +51,7 @@
 				</article>
 
 			<?php endif; ?>
-		</div><!-- #content .site-content -->
+		</div>
 	</main>
+	
 <?php get_footer(); ?>

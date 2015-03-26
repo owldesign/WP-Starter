@@ -1,4 +1,5 @@
 <?php
+
 /*
  *  Author: Vadim Goncharov | @owldesign
  *  Author URL: owl-design.net 
@@ -14,6 +15,7 @@ define('PUBLIC_URL', get_template_directory_uri());
 define('PUBLIC_DIR', get_template_directory());
 define('PUBLIC_ASSETS', get_template_directory_uri() . '/assets');
 define('PUBLIC_JS_FOLDER', PUBLIC_ASSETS . '/js');
+define('PUBLIC_DIST_FOLDER', PUBLIC_ASSETS . '/dist');
 define('PUBLIC_CSS_FOLDER', PUBLIC_ASSETS . '/css');
 
 // Admin
@@ -76,8 +78,8 @@ register_nav_menus(
 function theme_javascript() {
 	wp_deregister_script('jquery');
 	wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', array(), null, false);
-	wp_enqueue_script('theme-plugins', PUBLIC_JS_FOLDER . '/plugins.js', array('jquery'), THEME_VERSION, true);
-	wp_enqueue_script('theme-application', PUBLIC_JS_FOLDER . '/application.js', array('jquery'), THEME_VERSION, true);
+	wp_enqueue_script('theme-plugins', PUBLIC_DIST_FOLDER . '/plugins.min.js', array('jquery'), THEME_VERSION, true);
+	wp_enqueue_script('theme-application', PUBLIC_DIST_FOLDER . '/application.min.js', array('jquery'), THEME_VERSION, true);
 
 	// Localize JS
 	$themeAPI = array(
@@ -90,7 +92,7 @@ function theme_javascript() {
 }
 
 function theme_stylesheet() {
-  wp_enqueue_style('theme-custom-style', PUBLIC_CSS_FOLDER . '/application.css', array(), THEME_VERSION, 'all');
+  wp_enqueue_style('theme-custom-style', PUBLIC_DIST_FOLDER . '/application.min.css', array(), THEME_VERSION, 'all');
   wp_enqueue_style('theme-style', get_stylesheet_uri());
 }
 add_action('wp_enqueue_scripts', 'theme_javascript');

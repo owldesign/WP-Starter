@@ -2180,6 +2180,10 @@
 			$tr2.attr( 'data-id', new_id );
 			
 			
+			// clear selected
+			$tr2.find('option[selected]').removeAttr('selected');
+			
+			
 			// add tr
 			$tr.after( $tr2 );
 					
@@ -2416,6 +2420,73 @@
 	
 	
 	/*
+	*  Append
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	12/02/2015
+	*  @since	5.1.5
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	acf.add_action('open_field change_field_type', function( $el ){
+		
+		// clear name
+		$el.find('tr[data-append]').each(function(){
+			
+			// vars
+			var append = $(this).data('append');
+			
+			
+			// find sibling
+			$sibling = $(this).siblings('[data-name="' + append + '"]');
+			
+			
+			// bail early if no $sibling
+			if( !$sibling.exists() ) {
+				
+				return;
+				
+			}
+			
+			
+			// vars
+			var $wrap = $sibling.children('.acf-input'),
+				$ul = $wrap.children('.acf-hl');
+			
+			
+			if( !$ul.exists() ) {
+				
+				$wrap.wrapInner('<ul class="acf-hl"><li></li></ul>');
+				
+				$ul = $wrap.children('.acf-hl');
+			}
+			
+			
+			// create $li
+			var $li = $('<li></li>').append( $(this).children('.acf-input').children() );
+			
+			
+			// append $li
+			$ul.append( $li );
+			
+			
+			// update cols
+			$ul.attr('data-cols', $ul.children().length );
+			
+			
+			// remove
+			$(this).remove();
+			
+		});
+			
+	});
+	
+	
+	/*
 	*  Select
 	*
 	*  This field type requires some extra logic for its settings
@@ -2526,111 +2597,7 @@
 		acf_render_radio_field( acf.field_group.focus( $(this) ) );
 		
 	});
-	
-	
-	/*
-	*  Google Map
-	*
-	*  This field type requires some extra logic for its settings
-	*
-	*  @type	function
-	*  @date	24/10/13
-	*  @since	5.0.0
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	acf.add_action('open_field change_field_type', function( $el ){
 		
-		// bail early if not google_map
-		if( $el.attr('data-type') != 'google_map' ) {
-		
-			return;
-			
-		}
-		
-		
-		// vars
-		$lat = $el.find('tr[data-name="center_lat"]');
-		$lng = $el.find('tr[data-name="center_lng"]');
-		tmpl = '<ul class="acf-hl"><li style="width:48%;">$lat</li><li style="width:48%; margin-left:4%;">$lng</li></ul>';
-		
-		
-		// validate
-		if( !$lng.exists() ) {
-		
-			return;
-			
-		}
-		
-		
-		// update tmpl
-		tmpl = tmpl.replace( '$lat', $lat.find('.acf-input').html() );
-		tmpl = tmpl.replace( '$lng', $lng.find('.acf-input').html() );
-		
-		
-		// update $lat
-		$lat.find('.acf-input').html( tmpl );
-		
-		
-		// remove $lng
-		$lng.remove();
-		
-	});
-	
-	
-	/*
-	*  oEmbed
-	*
-	*  This field type requires some extra logic for its settings
-	*
-	*  @type	function
-	*  @date	24/10/13
-	*  @since	5.0.0
-	*
-	*  @param	n/a
-	*  @return	n/a
-	*/
-	
-	acf.add_action('open_field change_field_type', function( $el ){
-		
-		// bail early if not oembed
-		if( $el.attr('data-type') != 'oembed' ) {
-		
-			return;
-			
-		}
-		
-		
-		// vars
-		$width = $el.find('tr[data-name="width"]');
-		$height = $el.find('tr[data-name="height"]');
-		tmpl = '<ul class="acf-hl"><li style="width:48%;">$width</li><li style="width:48%; margin-left:4%;">$height</li></ul>';
-		
-		
-		// validate
-		if( !$width.exists() ) {
-		
-			return;
-			
-		}
-		
-		
-		// update tmpl
-		tmpl = tmpl.replace( '$width', $width.find('.acf-input').html() );
-		tmpl = tmpl.replace( '$height', $height.find('.acf-input').html() );
-		
-		
-		// update $lat
-		$width.find('.acf-input').html( tmpl );
-		
-		
-		// remove $lng
-		$height.remove();
-		
-	});
-	
 	
 	/*
 	*  Date Picker
@@ -2682,6 +2649,64 @@
 	$(document).on('change', '.acf-field-object-date-picker input[type="radio"]', function(){
 		
 		acf_render_date_picker_field( acf.field_group.focus( $(this) ) );
+		
+	});
+	
+	
+	/*
+	*  tab
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	12/02/2015
+	*  @since	5.1.5
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	acf.add_action('change_field_label change_field_type', function( $el ){
+		
+		// bail early if not radio
+		if( $el.attr('data-type') != 'tab' ) {
+			
+			return;
+			
+		}
+		
+		
+		// clear name
+		$el.find('tr[data-name="name"]:first input').val('').trigger('change');
+		
+	});
+	
+	
+	/*
+	*  message
+	*
+	*  description
+	*
+	*  @type	function
+	*  @date	12/02/2015
+	*  @since	5.1.5
+	*
+	*  @param	$post_id (int)
+	*  @return	$post_id (int)
+	*/
+	
+	acf.add_action('change_field_label change_field_type', function( $el ){
+		
+		// bail early if not radio
+		if( $el.attr('data-type') != 'message' ) {
+			
+			return;
+			
+		}
+		
+		
+		// clear name
+		$el.find('tr[data-name="name"]:first input').val('').trigger('change');
 		
 	});
 	
