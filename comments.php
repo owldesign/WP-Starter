@@ -1,6 +1,6 @@
 <div class="comments">
 	<?php if (post_password_required()) : ?>
-	<p><?php _e( 'Post is password protected. Enter the password to view any comments.', 'html5blank' ); ?></p>
+	<p><?php _e('Post is password protected. Enter the password to view any comments.', $textdomain); ?></p>
 </div>
 
 	<?php return; endif; ?>
@@ -13,9 +13,9 @@
 		<?php wp_list_comments('type=comment&callback=themecomments'); // Custom callback in functions.php ?>
 	</ul>
 
-<?php elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+<?php elseif (!comments_open() && ! is_page() && post_type_supports(get_post_type(), 'comments')) : ?>
 
-	<p><?php _e( 'Comments are closed here.', 'html5blank' ); ?></p>
+	<p><?php _e('Comments are closed here.', $textdomain); ?></p>
 
 <?php endif; ?>
 
