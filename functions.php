@@ -47,9 +47,6 @@ if (!isset($content_width)) {
 }
 
 if (function_exists('add_theme_support')) {
-  // Add Menu Support
-  add_theme_support('menus');
-
   // Add Thumbnail Theme Support
   add_theme_support('post-thumbnails');
   add_image_size('large', 1024, '', true); // Large Thumbnail
@@ -312,7 +309,7 @@ function themecomments($comment, $args, $depth) {
 	<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
 	<?php endif; ?>
 	<div class="comment-author vcard">
-	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
+	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['avatar_size'] ); ?>
 	<?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
 	</div>
 <?php if ($comment->comment_approved == '0') : ?>
@@ -356,12 +353,7 @@ remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the ext
 remove_action('wp_head', 'feed_links', 2); // Display the links to the general feeds: Post and Comment Feed
 remove_action('wp_head', 'rsd_link'); // Display the link to the Really Simple Discovery service endpoint, EditURI link
 remove_action('wp_head', 'wlwmanifest_link'); // Display the link to the Windows Live Writer manifest file.
-remove_action('wp_head', 'index_rel_link'); // Index link
-remove_action('wp_head', 'parent_post_rel_link', 10, 0); // Prev link
-remove_action('wp_head', 'start_post_rel_link', 10, 0); // Start link
-remove_action('wp_head', 'adjacent_posts_rel_link', 10, 0); // Display relational links for the posts adjacent to the current post.
 remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
@@ -449,4 +441,50 @@ function shortcode_demo($atts, $content = null) {
 // Demo Heading H2 shortcode, allows for nesting within above element. Fully expandable.
 function shortcode_demo_2($atts, $content = null) {
   return '<h2>' . $content . '</h2>';
+}
+
+/** 
+
+  CUSTOM FIELDS | ACF
+
+*/
+add_filter('acf/settings/path', 'my_acf_settings_path');
+function my_acf_settings_path($path) {
+  $path = ADMIN_DIR . '/acf/';
+  return $path;
+}
+add_filter('acf/settings/dir', 'my_acf_settings_dir');
+function my_acf_settings_dir($dir) {
+  $dir = ADMIN_URL . '/acf/';
+  return $dir;
+}
+add_filter('acf/settings/save_json', 'my_acf_json_save_point');
+function my_acf_json_save_point( $path ) {
+  // update path
+  $path = get_stylesheet_directory() . '/admin/fields';
+  // return
+  return $path;
+}
+add_filter('acf/settings/load_json', 'my_acf_json_load_point');
+function my_acf_json_load_point( $paths ) {
+  // remove original path (optional)
+  unset($paths[0]);
+  // append path
+  $paths[] = get_stylesheet_directory() . '/admin/fields';
+  // return
+  return $paths;
+}
+
+// Hide ACF field group menu item
+// add_filter('acf/settings/show_admin', '__return_false');
+// Include ACF
+include_once(ADMIN_DIR . '/acf/acf.php');
+
+/** 
+
+  THEME OPTIONS
+
+*/
+if (file_exists(ADMIN_DIR .'/theme-options.php')) {
+  require_once ADMIN_DIR .'/theme-options.php';
 }
