@@ -37,9 +37,10 @@ module.exports = (grunt) ->
         options:
           compress: false
           sourcemap: 'none'
-          style: 'expanded'
+          style: 'compact' # nested, compact, compressed, expanded
         files: 
           '<%= distFolder %>/css/application.css': '<%= publicScss %>/application.scss'
+          '<%= distFolder %>/css/editor-styles.css': '<%= publicScss %>/editor-styles.scss'
 
     # =============================================
     # compile coffee files

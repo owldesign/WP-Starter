@@ -3,83 +3,42 @@ Site Name: WP Starter Theme
 Author: Vadim Goncharov (@owldesign)
 
 Stylesheet: Application
-
-http://thesassway.com/advanced/modular-css-naming-conventions
-
 ******************************************************************/
 
-/*********************
-IMPORT BURBON
-*********************/
+// IMPORT BURBON
+@import "bourbon/bourbon"; // Sass mixins, functions, etc
 
-// Sass mixins, functions, etc
-@import "bourbon/bourbon";
+// IMPORT PARTIALS
+@import "partials/normalize"; // normalize: http://necolas.github.io/normalize.css/
+@import "partials/variables"; // Sass variables
+@import "partials/typography"; // typography
+@import "partials/mixins"; // custom mixins
+@import "partials/grid"; // the grid
 
+// IMPORTING MODULES
+@import "modules/alerts"; // alert boxes
+@import "modules/buttons"; // buttons
+@import "modules/forms"; // forms (inputs & labels)
 
-/*********************
-IMPORTING PARTIALS
-*********************/
+// BASE SIZE
+@import "breakpoints/base";
 
-// normalize: http://necolas.github.io/normalize.css/
-@import "partials/normalize";
+// LARGER MOBILE DEVICES
+@media only screen and (min-width: 481px) { @import "breakpoints/481up"; } 
 
-// Sass variables
-@import "partials/variables";
-
-// typography
-@import "partials/typography";
-
-// import mixins
-@import "partials/mixins";
-
-// the grid
-@import "partials/grid";
-
-
-/*********************
-IMPORTING MODULES
-*********************/
-
-// alert boxes
-@import "modules/alerts";
-
-// buttons
-@import "modules/buttons";
-
-// forms (inputs & labels)
-@import "modules/forms";
-
-
-/*********************
-LARGER MOBILE DEVICES
-*********************/
-@media only screen and (min-width: 481px) { @import "breakpoints/481up"; }
-
-/*********************
-TABLET & SMALLER LAPTOPS
-*********************/
+// TABLET & SMALLER LAPTOPS
 @media only screen and (min-width: 768px) { @import "breakpoints/768up"; }
 
-/*********************
-DESKTOP
-*********************/
+// DESKTOP
 @media only screen and (min-width: 1030px) { @import "breakpoints/1030up"; }
 
-/*********************
-LARGE VIEWING SIZE
-*********************/
+// LARGE VIEWING SIZE
 @media only screen and (min-width: 1240px) { @import "breakpoints/1240up"; } 
 
-/*********************
-RETINA (2x RESOLUTION DEVICES)
-*********************/
+// RETINA 2x RESOLUTION DEVICES
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-    only screen and (min--moz-device-pixel-ratio: 1.5),
-    only screen and (min-device-pixel-ratio: 1.5) { @import "breakpoints/2x"; }
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) { @import "breakpoints/2x"; }
 
-/*********************
-PRINT STYLESHEET
-*********************/
+// PRINT STYLESHEET
 @media print { @import "partials/print"; }
-
-

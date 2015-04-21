@@ -1,18 +1,7 @@
-/******************************************************************
-Site Name: WP Starter Theme
-Author: Vadim Goncharov (@owldesign)
+// Stylesheet: Typography
+// http://trentwalton.com/2012/06/19/fluid-type/
 
-Stylesheet: Typography
-
-Helpful Articles:
-http://trentwalton.com/2012/06/19/fluid-type/
-
-******************************************************************/
-
-/*********************
-FONT FACE
-*********************/
-
+// FONT FACE
 /*  @font-face {
       font-family: 'Font Name';
       src: url('library/fonts/font-name.eot');
@@ -28,7 +17,7 @@ FONT FACE
 // font stacks
 $sans-serif:        "Helvetica Neue", Helvetica, Arial, sans-serif;
 $serif:             "Georgia", Cambria, Times New Roman, Times, serif;
-
+$lato:              'Lato', $sans-serif;
 
 p {
   -ms-word-wrap: break-word;

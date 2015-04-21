@@ -2,7 +2,12 @@
   var Application;
 
   Application = function() {
-    return console.log('Theme Loaded!');
+    var devNotice;
+    console.log('Theme Loaded!');
+    if (theme_api.devMode) {
+      devNotice = '<div class="dev front-end">DEV</div>';
+      return $('body').prepend(devNotice);
+    }
   };
 
   Application();

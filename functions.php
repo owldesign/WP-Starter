@@ -58,6 +58,8 @@ if (function_exists('add_theme_support')) {
   add_image_size('large', 1024, '', true); // Large Thumbnail
   add_image_size('medium', 250, '', true); // Medium Thumbnail
 
+  add_editor_style(PUBLIC_DIST_FOLDER . '/css/editor-style.css');
+
   // Enables post and comment RSS feed links to head
   add_theme_support('automatic-feed-links');
 
@@ -138,8 +140,9 @@ function theme_javascript() {
 
     // Localize JS
     $themeAPI = array(
-      'siteUrl' => get_site_url(),
+      'siteUrl'   => get_site_url(),
       'themePath' => get_stylesheet_directory_uri(),
+      'devMode'   => DEBUG
     );
 
     wp_localize_script('theme-application', 'theme_api', $themeAPI);
@@ -154,7 +157,7 @@ function page_conditional_scripts() {
   }
 }
 
-// Load HTML5 Blank styles
+// Load styles
 function theme_stylesheet() {
   wp_enqueue_style('theme-plugins', PUBLIC_DIST_FOLDER . '/css/plugins.css', array(), THEME_VERSION, 'all');
   if (DEBUG == true) {
@@ -164,6 +167,12 @@ function theme_stylesheet() {
   }
   wp_enqueue_style('theme-style', get_stylesheet_uri());
 }
+
+// Load google fonts
+function google_fonts() {
+  wp_enqueue_style('googleFonts', 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
+}
+add_action('wp_enqueue_scripts', 'google_fonts');
 
 /** 
 
