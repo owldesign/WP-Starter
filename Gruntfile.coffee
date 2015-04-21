@@ -10,9 +10,7 @@ module.exports = (grunt) ->
     pkg: '<json:package.json>'
 
     # file constants
-    publicCss: 'assets/css'
     publicScss: 'assets/scss'
-    publicJs: 'assets/js'
     publicCoffee: 'assets/coffee'
     distFolder: 'assets/dist'
 
@@ -25,7 +23,7 @@ module.exports = (grunt) ->
         tasks: ['sass']
       scripts:
         files: ['<%= publicCoffee %>/*']
-        tasks: ['coffee', 'uglify']
+        tasks: ['coffee']
       options:
         livereload: false
 
@@ -41,7 +39,7 @@ module.exports = (grunt) ->
           sourcemap: 'none'
           style: 'expanded'
         files: 
-          '<%= publicCss %>/application.css': '<%= publicScss %>/application.scss'
+          '<%= distFolder %>/css/application.css': '<%= publicScss %>/application.scss'
 
     # =============================================
     # compile coffee files
@@ -52,7 +50,7 @@ module.exports = (grunt) ->
       compile:
         expand: true
         files:
-          '<%= publicJs %>/application.js': ['<%= publicCoffee %>/application.coffee']
+          '<%= distFolder %>/js/application.js': ['<%= publicCoffee %>/application.coffee']
 
     # =============================================
     # uglify javascript
@@ -66,8 +64,7 @@ module.exports = (grunt) ->
         compress: true
       dist:
         files:
-          '<%= distFolder %>/application.min.js': ['<%= publicJs %>/application.js']
-          '<%= distFolder %>/plugins.min.js': ['<%= publicJs %>/plugins.js']
+          '<%= distFolder %>/js/application.min.js': ['<%= distFolder %>/js/application.js']
 
     # =============================================
     # css minifier
@@ -77,7 +74,7 @@ module.exports = (grunt) ->
     cssmin:
       dist:
         files:
-          '<%= distFolder %>/application.min.css': ['<%= publicCss %>/application.css']
+          '<%= distFolder %>/css/application.min.css': ['<%= distFolder %>/css/application.css']
 
     # =============================================
     # load plugins

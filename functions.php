@@ -5,6 +5,14 @@
  *  Author URL: owl-design.net 
  */
 
+
+/**
+
+  ENVIRONMENTS // change to false for production
+  
+*/
+define('DEBUG', true);
+
 /**
 
   DEFINE CONSTANTS
@@ -14,9 +22,7 @@
 define('PUBLIC_URL', get_template_directory_uri());
 define('PUBLIC_DIR', get_template_directory());
 define('PUBLIC_ASSETS', get_template_directory_uri() . '/assets');
-define('PUBLIC_JS_FOLDER', PUBLIC_ASSETS . '/js');
 define('PUBLIC_DIST_FOLDER', PUBLIC_ASSETS . '/dist');
-define('PUBLIC_CSS_FOLDER', PUBLIC_ASSETS . '/css');
 
 // Admin
 define('ADMIN_URL', get_template_directory_uri() . '/admin');
@@ -123,8 +129,12 @@ function theme_javascript() {
     wp_deregister_script('jquery');
     wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', array(), null, false);
 
-    wp_enqueue_script('theme-plugins', PUBLIC_DIST_FOLDER . '/plugins.min.js', array('jquery'), THEME_VERSION, true);
-    wp_enqueue_script('theme-application', PUBLIC_DIST_FOLDER . '/application.min.js', array('jquery'), THEME_VERSION, true);
+    wp_enqueue_script('theme-plugins', PUBLIC_DIST_FOLDER . '/js/plugins.js', array('jquery'), THEME_VERSION, true);
+    if (DEBUG == true) {
+      wp_enqueue_script('theme-application', PUBLIC_DIST_FOLDER . '/js/application.js', array('jquery'), THEME_VERSION, true);
+    } else {
+      wp_enqueue_script('theme-application', PUBLIC_DIST_FOLDER . '/js/application.min.js', array('jquery'), THEME_VERSION, true);
+    }
 
     // Localize JS
     $themeAPI = array(
@@ -146,7 +156,12 @@ function page_conditional_scripts() {
 
 // Load HTML5 Blank styles
 function theme_stylesheet() {
-  wp_enqueue_style('theme-custom-style', PUBLIC_DIST_FOLDER . '/application.min.css', array(), THEME_VERSION, 'all');
+  wp_enqueue_style('theme-plugins', PUBLIC_DIST_FOLDER . '/css/plugins.css', array(), THEME_VERSION, 'all');
+  if (DEBUG == true) {
+    wp_enqueue_style('theme-application', PUBLIC_DIST_FOLDER . '/css/application.css', array(), THEME_VERSION, 'all');
+  } else {
+    wp_enqueue_style('theme-application', PUBLIC_DIST_FOLDER . '/css/application.min.css', array(), THEME_VERSION, 'all');
+  }
   wp_enqueue_style('theme-style', get_stylesheet_uri());
 }
 

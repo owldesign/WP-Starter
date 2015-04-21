@@ -1,0 +1,49 @@
+/******************************************************************
+Site Name: WP Starter Theme
+Author: Vadim Goncharov (@owldesign)
+
+Stylesheet: Base Mobile Stylesheet
+
+******************************************************************/
+
+/*********************
+GENERAL STYLES
+*********************/
+
+body {
+  font-family: $sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  color: $text-color;
+  background-color: $gray;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*********************
+LINK STYLES
+*********************/
+
+a, a:visited {
+  color: $link-color;
+
+  /* on hover */
+  &:hover, &:focus {
+    color: $link-hover;
+  }
+
+  /* on click */
+  &:active {
+
+  }
+
+  /* mobile tap color */
+  &:link {
+    /*
+    this highlights links on iPhones/iPads.
+    so it basically works like the :hover selector
+    for mobile devices.
+    */
+    -webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+  }
+}
