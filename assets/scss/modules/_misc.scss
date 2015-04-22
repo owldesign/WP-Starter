@@ -1,0 +1,20 @@
+/******************************************************************
+Misc
+******************************************************************/
+
+// Selection
+::selection {
+  background:#04A4CC;
+  color:#FFF;
+  text-shadow:none;
+}
+::-webkit-selection {
+  background:#04A4CC;
+  color:#FFF;
+  text-shadow:none;
+}
+::-moz-selection {
+  background:#04A4CC;
+  color:#FFF;
+  text-shadow:none;
+}

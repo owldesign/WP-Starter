@@ -170,9 +170,28 @@ function theme_stylesheet() {
 
 // Load google fonts
 function google_fonts() {
-  wp_enqueue_style('googleFonts', 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');
+  wp_enqueue_style('robotoFont', 'http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900');
 }
 add_action('wp_enqueue_scripts', 'google_fonts');
+
+/** 
+
+  CUSTOM LOGIN PAGE
+  
+*/
+function custom_login_css() {
+  wp_enqueue_style('custom_login_css', PUBLIC_DIST_FOLDER . '/css/login.css', false);
+}
+// changing the logo link from wordpress.org to your site
+function custom_login_url() {  return home_url(); }
+
+// changing the alt text on the logo to show your site name
+function custom_login_title() { return get_option('blogname'); }
+
+// calling it only on the login page
+add_action('login_enqueue_scripts', 'custom_login_css', 10);
+add_filter('login_headerurl', 'custom_login_url');
+add_filter('login_headertitle', 'custom_login_title');
 
 /** 
 

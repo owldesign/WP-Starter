@@ -1,1 +1,54 @@
-// Stylesheet: Buttons
+/******************************************************************
+Stylesheet: Buttons
+******************************************************************/
+
+// BUTTON VARIABLES
+$buttonFontFamily: $sans-serif;
+$buttonFontSize: 12px;
+$buttonFontWeight: 200;
+$buttonLineHeight: 12px;
+$buttonPadding: 5px 20px;
+$buttonRadius: 3px;
+
+// BUTTON DEFAULTS
+%btn {
+  display: inline-block;
+  position: relative;
+  font: {
+    family: $buttonFontFamily;
+    size: $buttonFontSize;
+    weight: $buttonFontWeight;
+  }
+  line-height: $buttonLineHeight;
+  text-decoration: none;
+  color: $white;
+  padding: $buttonPadding;
+  border-radius: $buttonRadius;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  @include transition(background-color .3s ease-in-out);
+
+  &:hover, &:focus {
+
+  } 
+
+  &:active {
+
+  } 
+} 
+
+// Blue Button
+.blue-btn {
+  @extend %btn; 
+  background-color: $blue;
+
+  &:hover,
+  &:focus {
+    background-color: darken($blue, 4%);
+  } 
+
+  &:active {
+    background-color: darken($blue, 5%);
+  } 
+} 

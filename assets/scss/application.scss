@@ -9,13 +9,13 @@ Stylesheet: Application
 @import "bourbon/bourbon"; // Sass mixins, functions, etc
 
 // IMPORT PARTIALS
-@import "partials/normalize"; // normalize: http://necolas.github.io/normalize.css/
+@import "partials/reset"; // reset: http://meyerweb.com/eric/tools/css/reset/
 @import "partials/variables"; // Sass variables
 @import "partials/typography"; // typography
 @import "partials/mixins"; // custom mixins
-@import "partials/grid"; // the grid
 
 // IMPORTING MODULES
+@import "modules/misc"; // misc
 @import "modules/alerts"; // alert boxes
 @import "modules/buttons"; // buttons
 @import "modules/forms"; // forms (inputs & labels)

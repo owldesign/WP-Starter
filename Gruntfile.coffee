@@ -41,6 +41,7 @@ module.exports = (grunt) ->
         files: 
           '<%= distFolder %>/css/application.css': '<%= publicScss %>/application.scss'
           '<%= distFolder %>/css/editor-styles.css': '<%= publicScss %>/editor-styles.scss'
+          '<%= distFolder %>/css/login.css': '<%= publicScss %>/login.scss'
 
     # =============================================
     # compile coffee files

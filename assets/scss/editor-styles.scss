@@ -9,53 +9,37 @@ Stylesheet: TinyMCE Editor
 /* Wrap the entire post style inside the TinyMCE selector, as suggested
 here http://codex.wordpress.org/Function_Reference/add_editor_style */
 body#tinymce.wp-editor {
-
-  // normalize: http://necolas.github.io/normalize.css/
-  @import "partials/normalize";
-
-  // Sass variables
-  @import "partials/variables";
-
-  // typography
-  @import "partials/typography";
-
-  // import mixins
-  @import "partials/mixins";
+  @import "partials/reset"; // reset: http://meyerweb.com/eric/tools/css/reset/
+  @import "partials/variables";  // Sass variables
+  @import "partials/typography"; // typography
+  @import "partials/mixins";  // import mixins
 
   width: 731px;
   font-family: $sans-serif;
   font-size: 100%;
   line-height: 1.5;
   color: $text-color;
-  -webkit-font-smoothing: antialiased;
+  @include antialias;
 
-  /*********************
-  LINK STYLES
-  *********************/
-
+  /******************************************************************
+  Link Styles
+  ******************************************************************/
   a, a:visited {
     color: $link-color;
-
-    /* on hover */
     &:hover, &:focus {
       color: $link-hover;
     }
-
-    /* on click */
     &:active {
 
     }
-
     &:link {
-
       -webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
     }
   }
-
+  
   /******************************************************************
   H1, H2, H3, H4, H5 STYLES
   ******************************************************************/
-
   h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
     text-rendering: optimizelegibility;
     font-weight: 500;
@@ -99,28 +83,28 @@ body#tinymce.wp-editor {
 
     table {
       width: 100%;
-      border: 1px solid $gray;
+      border: 1px solid $light-blue;
       margin-bottom: 1.5em;
 
       caption {
         margin: 0 0 7px;
         font-size: 0.75em;
-        color: $meta-gray;
+        color: $light-blue;
         text-transform: uppercase;
         letter-spacing: 1px;
       }
     }
 
     tr {
-      border-bottom: 1px solid $gray;
+      border-bottom: 1px solid $light-blue;
       &:nth-child(even) {
-        background-color: $light-gray;
+        background-color: $light-blue;
       }
     }
 
     td {
       padding: 7px;
-      border-right: 1px solid $gray;
+      border-right: 1px solid $light-blue;
 
       &:last-child {
         border-right: 0;
@@ -128,9 +112,9 @@ body#tinymce.wp-editor {
     }
 
     th {
-      background-color: $light-gray;
-      border-bottom: 1px solid $gray;
-      border-right: 1px solid $gray;
+      background-color: $light-blue;
+      border-bottom: 1px solid $light-blue;
+      border-right: 1px solid $light-blue;
 
       &:last-child {
         border-right: 0;
@@ -142,7 +126,7 @@ body#tinymce.wp-editor {
       padding: 0 0 0 0.75em;
       border-left: 3px solid $blue;
       font-style: italic;
-      color: $meta-gray;
+      color: $light-blue;
 
       &:before {}
 
@@ -172,19 +156,16 @@ body#tinymce.wp-editor {
 
     pre {
       background: $black;
-      color: $light-gray;
+      color: $light-blue;
       font-size: 0.9em;
       padding: 1.5em;
       margin: 0 0 1.5em;
       border-radius: 3px;
     }
-
-    /*********************
+    
+    /******************************************************************
     LARGER MOBILE DEVICES
-    This is for devices like the Galaxy Note or something that's
-    larger than an iPhone but smaller than a tablet. Let's call them
-    tweeners.
-    *********************/
+    ******************************************************************/
     @media only screen and (min-width: 481px) {
 
       /* at this larger size, we can start to align images */
@@ -206,7 +187,4 @@ body#tinymce.wp-editor {
       }
 
     }
-
-
 }
-

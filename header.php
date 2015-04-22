@@ -19,22 +19,14 @@
 		<!-- wrapper -->
 		<div class="wrapper">
 
-			<!-- header -->
 			<header class="header clear" role="banner">
+				<div class="logo">
+					<a href="<?php echo home_url(); ?>">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="Logo" class="logo-img">
+					</a>
+				</div>
 
-					<!-- logo -->
-					<div class="logo">
-						<a href="<?php echo home_url(); ?>">
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="Logo" class="logo-img">
-						</a>
-					</div>
-					<!-- /logo -->
-
-					<!-- nav -->
-					<nav class="nav" role="navigation">
-						<?php theme_nav(); ?>
-					</nav>
-					<!-- /nav -->
-
+				<nav class="nav" role="navigation">
+					<?php theme_nav(); ?>
+				</nav>
 			</header>
-			<!-- /header -->

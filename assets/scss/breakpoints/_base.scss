@@ -1,4 +1,6 @@
-// Stylesheet: Base Mobile Stylesheet 
+/******************************************************************
+Stylesheet: Base Mobile Stylesheet 
+******************************************************************/
 
 /*********************
 DEV MODE
@@ -25,11 +27,8 @@ GENERAL STYLES
 body {
   font-family: $sans-serif;
   font-size: 100%;
-  line-height: 1.5;
   color: $text-color;
-  background-color: $gray;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  @include antialias;
 }
 
 /*********************
