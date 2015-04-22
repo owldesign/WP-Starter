@@ -1,5 +1,13 @@
-# [HTML5 Blank](http://html5blank.com)
+# WordPress Starter Theme
 
-Powerful shell for rapidly deploying your WordPress projects.
+***
 
-* Project: [github.com/toddmotto/html5blank](https://github.com/toddmotto/html5blank)
+* GRUNT
+* SCSS
+* Coffee Script
+* More...
+
+I've used these great starter themes to make this one.
+
+* Bones: [https://github.com/eddiemachado/bones]()
+* HTML5 Blank: [github.com/toddmotto/html5blank](https://github.com/toddmotto/html5blank)
