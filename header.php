@@ -26,6 +26,6 @@
 				</div>
 
 				<nav class="nav" role="navigation">
-					<?php theme_nav(); ?>
+					<?php wp_nav_menu('name-of-your-menu'); ?>
 				</nav>
 			</header>
