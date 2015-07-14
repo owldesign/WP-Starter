@@ -534,20 +534,6 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 	// replace
 	$wrapper['class'] = str_replace('_', '-', $wrapper['class']);
 	$wrapper['class'] = str_replace('field-field-', 'field-', $wrapper['class']);
-	
-	
-	// compatibility
-	if( acf_get_compatibility('field_wrapper_class') ) {
-		
-		$wrapper['class'] .= " field_type-{$field['type']}";
-		
-		if( $field['key'] ) {
-			
-			$wrapper['class'] .= " field_key-{$field['key']}";
-			
-		}
-		
-	}
 		
 	
 	// merge in atts
@@ -614,32 +600,6 @@ function acf_render_field_wrap( $field, $el = 'div', $instruction = 'label' ) {
 <?php endif; ?>
 </<?php echo $el; ?>>
 <?php
-	
-}
-
-
-/*
-*  acf_render_field_settings
-*
-*  This function will render the available field options using an action to trigger the field's render function
-*
-*  @type	function
-*  @date	23/01/13
-*  @since	3.6.0
-*
-*  @param	$field (array)
-*  @return	n/a
-*/
-
-function acf_render_field_settings( $field ) {
-	
-	// get valid field
-	$field = acf_get_valid_field( $field );
-	
-	
-	// create field specific html
-	do_action( "acf/render_field_settings", $field);
-	do_action( "acf/render_field_settings/type={$field['type']}", $field);
 	
 }
 
@@ -771,7 +731,7 @@ function acf_get_fields_by_id( $id = 0 ) {
 	
 	// cache
 	$found = false;
-	$cache = wp_cache_get( 'fields/parent=' . $id, 'acf', false, $found );
+	$cache = wp_cache_get( 'get_fields/parent=' . $id, 'acf', false, $found );
 	
 	if( $found )
 	{
@@ -805,7 +765,7 @@ function acf_get_fields_by_id( $id = 0 ) {
 	
 	
 	// set cache
-	wp_cache_set( 'fields/parent=' . $id, $fields, 'acf' );
+	wp_cache_set( 'get_fields/parent=' . $id, $fields, 'acf' );
 		
 	
 	// return
@@ -867,7 +827,7 @@ function acf_get_field( $selector = null, $raw = false ) {
 	
 	
 	// get cache key
-	$cache_key = "load_field/{$k}={$v}";
+	$cache_key = "get_field/{$k}={$v}";
 	
 	
 	// get cache
@@ -897,14 +857,6 @@ function acf_get_field( $selector = null, $raw = false ) {
 	}
 	
 	
-	// bail ealry if no field
-	if( !$field) {
-		
-		return false;
-		
-	}
-	
-	
 	// bail early if db only value (no need to update cache)
 	if( $raw ) {
 		
@@ -912,14 +864,18 @@ function acf_get_field( $selector = null, $raw = false ) {
 		
 	}
 	
-
-	// filter for 3rd party customization
-	$field = apply_filters('acf/load_field', $field);
-	$field = apply_filters( "acf/load_field/type={$field['type']}", $field );
-	$field = apply_filters( "acf/load_field/name={$field['name']}", $field );
-	$field = apply_filters( "acf/load_field/key={$field['key']}", $field );
 	
-
+	// filter for 3rd party customization
+	if( $field ) {
+		
+		$field = apply_filters( "acf/load_field", $field);
+		$field = apply_filters( "acf/load_field/type={$field['type']}", $field );
+		$field = apply_filters( "acf/load_field/name={$field['name']}", $field );
+		$field = apply_filters( "acf/load_field/key={$field['key']}", $field );
+		
+	}
+	
+	
 	// set cache
 	wp_cache_set( $cache_key, $field, 'acf' );
 
@@ -1264,12 +1220,9 @@ function acf_update_field( $field = false, $specific = false ) {
 	
     
     // clear cache
-	wp_cache_delete( "load_field/ID={$field['ID']}", 'acf' );
-	wp_cache_delete( "fields/parent={$field['parent']}", 'acf' );
-	
-	
-    // update cache
-	//wp_cache_set( "load_field/ID={$field['ID']}", $field, 'acf' );
+	wp_cache_delete( "get_field/ID={$field['ID']}", 'acf' );
+	wp_cache_delete( "get_field/key={$field['key']}", 'acf' );
+	wp_cache_delete( "get_fields/parent={$field['parent']}", 'acf' );
 	
 	
     // return
@@ -1504,8 +1457,9 @@ function acf_delete_field( $selector = 0 ) {
 	
 	
 	// clear cache
-	wp_cache_delete( "load_field/ID={$field['ID']}", 'acf' );
-	wp_cache_delete( "fields/parent={$field['parent']}", 'acf' );
+	wp_cache_delete( "get_field/ID={$field['ID']}", 'acf' );
+	wp_cache_delete( "get_field/key={$field['key']}", 'acf' );
+	wp_cache_delete( "get_fields/parent={$field['parent']}", 'acf' );
 	
 	
 	// return
@@ -1662,6 +1616,7 @@ function acf_prepare_field_for_export( $field ) {
 	// extract some args
 	$extract = acf_extract_vars($field, array(
 		'ID',
+		'prefix',
 		'value',
 		'menu_order',
 		'id',
